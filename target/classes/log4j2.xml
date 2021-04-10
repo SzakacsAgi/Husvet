@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="DEBUG">
+    <Appenders>
+
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%X{iteration}. iteráció] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <File name="LogToFileL" fileName="logs/sor.log">
+            <MarkerFilter marker="sor" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+        <File name="LogToFileQ" fileName="logs/kerdo.log">
+            <MarkerFilter marker="kérdő" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <File name="LogToFileGY" fileName="logs/Győrfi_Pál.log">
+            <MarkerFilter marker="kérdő" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        <!--
+        <File name="LogToFile" fileName="logs/line.log">
+            <MarkerFilter marker="EXCLAMATION_M" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+        -->
+        <File name="LogToFileS" fileName="logs/nomarker.log">
+            <NoMarkerFilter onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout>
+                <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+            </PatternLayout>
+        </File>
+
+    </Appenders>
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
+            <AppenderRef ref="LogToFileL"/>
+            <AppenderRef ref="LogToFileS"/>
+            <AppenderRef ref="LogToFileQ">
+                <TimeFilter start="20:00:00" end="05:00:00" onMatch="DENY" onMismatch="ACCEPT"/>
+            </AppenderRef>
+            <AppenderRef ref="LogToFileGY">
+                <TimeFilter start="20:00:00" end="05:00:00" onMatch="ACCEPT" onMismatch="DENY"/>
+            </AppenderRef>
+        </Root>
+    </Loggers>
+</Configuration>
